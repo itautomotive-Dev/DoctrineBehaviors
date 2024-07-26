@@ -6,7 +6,7 @@
        "doctrine", "translatable"
     ],
     "license": "MIT",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "require": {
         "php": ">=8.2",
         "doctrine/common": "^3.4",
