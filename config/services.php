@@ -9,8 +9,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $parameters->set('doctrine_behaviors_translatable_fetch_mode', 'LAZY');
     $parameters->set('doctrine_behaviors_translation_fetch_mode', 'LAZY');
-    $parameters->set('doctrine_behaviors_blameable_user_entity', null);
-    $parameters->set('doctrine_behaviors_timestampable_date_field_type', 'datetime');
 
     $services = $containerConfigurator->services();
 
@@ -19,9 +17,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->autowire()
         ->autoconfigure()
         ->bind('$translatableFetchMode', '%doctrine_behaviors_translatable_fetch_mode%')
-        ->bind('$translationFetchMode', '%doctrine_behaviors_translation_fetch_mode%')
-        ->bind('$blameableUserEntity', '%doctrine_behaviors_blameable_user_entity%')
-        ->bind('$timestampableDateFieldType', '%doctrine_behaviors_timestampable_date_field_type%');
+        ->bind('$translationFetchMode', '%doctrine_behaviors_translation_fetch_mode%');
 
     $services->load('Knp\DoctrineBehaviors\\', __DIR__ . '/../src')
         ->exclude([

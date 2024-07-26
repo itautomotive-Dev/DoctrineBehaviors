@@ -14,7 +14,7 @@ trait TranslatableMethodsTrait
     /**
      * @return Collection<string, TranslationInterface>
      */
-    public function getTranslations()
+    public function getTranslations(): Collection
     {
         // initialize collection, usually in ctor
         if ($this->translations === null) {
@@ -27,6 +27,7 @@ trait TranslatableMethodsTrait
     /**
      * @param Collection<string, TranslationInterface> $translations
      * @phpstan-param iterable<TranslationInterface> $translations
+     * @throws TranslatableException
      */
     public function setTranslations(iterable $translations): void
     {
@@ -68,7 +69,9 @@ trait TranslatableMethodsTrait
      * exist, it will first try to fallback default locale If any translation doesn't exist, it will be added to
      * newTranslations collection. In order to persist new translations, call mergeNewTranslations method, before flush
      *
-     * @param string $locale The locale (en, ru, fr) | null If null, will try with current locale
+     * @param string|null $locale The locale (en, ru, fr) | null If null, will try with current locale
+     * @param bool $fallbackToDefault
+     * @return TranslationInterface
      */
     public function translate(?string $locale = null, bool $fallbackToDefault = true): TranslationInterface
     {
@@ -127,7 +130,9 @@ trait TranslatableMethodsTrait
      * exist, it will first try to fallback default locale If any translation doesn't exist, it will be added to
      * newTranslations collection. In order to persist new translations, call mergeNewTranslations method, before flush
      *
-     * @param string $locale The locale (en, ru, fr) | null If null, will try with current locale
+     * @param string|null $locale The locale (en, ru, fr) | null If null, will try with current locale
+     * @param bool $fallbackToDefault
+     * @return TranslationInterface
      */
     protected function doTranslate(?string $locale = null, bool $fallbackToDefault = true): TranslationInterface
     {
@@ -165,11 +170,12 @@ trait TranslatableMethodsTrait
     }
 
     /**
+     * @param array<string, mixed> $arguments
      * An extra feature allows you to proxy translated fields of a translatable entity.
      *
      * @return mixed The translated value of the field for current locale
      */
-    protected function proxyCurrentLocaleTranslation(string $method, array $arguments = [])
+    protected function proxyCurrentLocaleTranslation(string $method, array $arguments = []): mixed
     {
         // allow $entity->name call $entity->getName() in templates
         if (! method_exists(self::getTranslationEntityClass(), $method)) {
@@ -212,8 +218,9 @@ trait TranslatableMethodsTrait
 
     /**
      * @param Collection|mixed $translations
+     * @throws TranslatableException
      */
-    private function ensureIsIterableOrCollection($translations): void
+    private function ensureIsIterableOrCollection(mixed $translations): void
     {
         if ($translations instanceof Collection) {
             return;

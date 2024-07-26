@@ -8,17 +8,19 @@ use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\Mapping\MappingException;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Doctrine\Persistence\ObjectManager;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslationInterface;
 use Knp\DoctrineBehaviors\Contract\Provider\LocaleProviderInterface;
 use ReflectionClass;
+use ReflectionException;
 
 #[AsDoctrineListener(event: Events::loadClassMetadata)]
 #[AsDoctrineListener(event: Events::postLoad)]
 #[AsDoctrineListener(event: Events::prePersist)]
-final class TranslatableEventSubscriber
+final readonly class TranslatableEventSubscriber
 {
     /**
      * @var string
@@ -40,6 +42,8 @@ final class TranslatableEventSubscriber
 
     /**
      * Adds mapping to the translatable and translations.
+     * @throws ReflectionException
+     * @throws MappingException
      */
     public function loadClassMetadata(LoadClassMetadataEventArgs $loadClassMetadataEventArgs): void
     {
@@ -62,11 +66,19 @@ final class TranslatableEventSubscriber
         }
     }
 
+    /**
+     * @param LifecycleEventArgs<ObjectManager> $lifecycleEventArgs
+     * @return void
+     */
     public function postLoad(LifecycleEventArgs $lifecycleEventArgs): void
     {
         $this->setLocales($lifecycleEventArgs);
     }
 
+    /**
+     * @param LifecycleEventArgs<ObjectManager> $lifecycleEventArgs
+     * @return void
+     */
     public function prePersist(LifecycleEventArgs $lifecycleEventArgs): void
     {
         $this->setLocales($lifecycleEventArgs);
@@ -92,6 +104,11 @@ final class TranslatableEventSubscriber
         return ClassMetadata::FETCH_LAZY;
     }
 
+    /**
+     * @param ClassMetadata<TranslatableInterface> $classMetadataInfo
+     * @return void
+     * @throws ReflectionException
+     */
     private function mapTranslatable(ClassMetadata $classMetadataInfo): void
     {
         if ($classMetadataInfo->hasAssociation('translations')) {
@@ -111,15 +128,22 @@ final class TranslatableEventSubscriber
         ]);
     }
 
+    /**
+     * @param ClassMetadata<TranslatableInterface> $classMetadataInfo
+     * @param ObjectManager $objectManager
+     * @return void
+     * @throws ReflectionException
+     * @throws MappingException
+     */
     private function mapTranslation(ClassMetadata $classMetadataInfo, ObjectManager $objectManager): void
     {
         if (! $classMetadataInfo->hasAssociation('translatable')) {
             $targetEntity = $classMetadataInfo->getReflectionClass()
-                ->getMethod('getTranslatableEntityClass')
+                ->getMethod('getTranslatableInterfaceClass')
                 ->invoke(null);
 
-            /** @var ClassMetadata $classMetadata */
-            $classMetadata = $objectManager->getClassMetadata($targetEntity);
+            /** @var ClassMetadata<TranslatableInterface> $classMetadata */
+            $classMetadata = $objectManager->getClassMetadata($targetEntity);//@phpstan-ignore-line
 
             $singleIdentifierFieldName = $classMetadata->getSingleIdentifierFieldName();
 
@@ -138,8 +162,10 @@ final class TranslatableEventSubscriber
         }
 
         $name = $classMetadataInfo->getTableName() . '_unique_translation';
-        if (! $this->hasUniqueTranslationConstraint($classMetadataInfo, $name) &&
-            $classMetadataInfo->getName() === $classMetadataInfo->rootEntityName) {
+        if (
+            ! $this->hasUniqueTranslationConstraint($classMetadataInfo, $name) &&
+            $classMetadataInfo->getName() === $classMetadataInfo->rootEntityName
+        ) {
             $classMetadataInfo->table['uniqueConstraints'][$name] = [
                 'columns' => ['translatable_id', self::LOCALE],
             ];
@@ -154,6 +180,10 @@ final class TranslatableEventSubscriber
         }
     }
 
+    /**
+     * @param LifecycleEventArgs<ObjectManager> $lifecycleEventArgs
+     * @return void
+     */
     private function setLocales(LifecycleEventArgs $lifecycleEventArgs): void
     {
         $entity = $lifecycleEventArgs->getObject();
@@ -172,6 +202,11 @@ final class TranslatableEventSubscriber
         }
     }
 
+    /**
+     * @param ClassMetadata<TranslatableInterface> $classMetadataInfo
+     * @param string $name
+     * @return bool
+     */
     private function hasUniqueTranslationConstraint(ClassMetadata $classMetadataInfo, string $name): bool
     {
         return isset($classMetadataInfo->table['uniqueConstraints'][$name]);
