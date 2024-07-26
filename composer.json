@@ -6,9 +6,7 @@
        "doctrine", "translatable"
     ],
     "license": "MIT",
-    "authors": [
-        { "name": "Knplabs"}
-    ],
+    "version": "1.0.0",
     "require": {
         "php": ">=8.2",
         "doctrine/common": "^3.4",
