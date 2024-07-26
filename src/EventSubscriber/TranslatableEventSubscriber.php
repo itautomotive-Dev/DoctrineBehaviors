@@ -22,9 +22,6 @@ use ReflectionException;
 #[AsDoctrineListener(event: Events::prePersist)]
 final readonly class TranslatableEventSubscriber
 {
-    /**
-     * @var string
-     */
     public const LOCALE = 'locale';
 
     private int $translatableFetchMode;
