@@ -1,5 +1,5 @@
 {
-    "name": "ithis/entity-translation",
+    "name": "ithis/entity-translation-bundle",
     "description": "Entity Translation Traits forked from Knplabs Doctrine behaviors",
     "type": "symfony-bundle",
     "keywords": [
@@ -49,9 +49,7 @@
         }
     },
     "scripts": {
-        "check-cs": "vendor/bin/ecs check --ansi",
-        "fix-cs": "vendor/bin/ecs check --fix --ansi",
-        "phpstan": "vendor/bin/phpstan analyse --ansi --error-format"
+        "phpstan": "vendor/bin/phpstan analyse"
     },
     "config": {
         "allow-plugins": {
