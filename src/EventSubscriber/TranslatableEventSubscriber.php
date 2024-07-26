@@ -136,7 +136,7 @@ final readonly class TranslatableEventSubscriber
     {
         if (! $classMetadataInfo->hasAssociation('translatable')) {
             $targetEntity = $classMetadataInfo->getReflectionClass()
-                ->getMethod('getTranslatableInterfaceClass')
+                ->getMethod('getTranslatableEntityClass')
                 ->invoke(null);
 
             /** @var ClassMetadata<TranslatableInterface> $classMetadata */
