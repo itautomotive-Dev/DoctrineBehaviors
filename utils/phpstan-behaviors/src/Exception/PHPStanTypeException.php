@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Knp\DoctrineBehaviors\PHPStan\Exception;
+namespace Ithis\Bundle\EntityTranslation\PHPStan\Exception;
 
 use Exception;
 

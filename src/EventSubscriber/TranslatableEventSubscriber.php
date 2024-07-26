@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Knp\DoctrineBehaviors\EventSubscriber;
+namespace Ithis\Bundle\EntityTranslation\EventSubscriber;
 
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
@@ -11,9 +11,9 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\MappingException;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Doctrine\Persistence\ObjectManager;
-use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
-use Knp\DoctrineBehaviors\Contract\Entity\TranslationInterface;
-use Knp\DoctrineBehaviors\Contract\Provider\LocaleProviderInterface;
+use Ithis\Bundle\EntityTranslation\Contract\Entity\TranslatableInterface;
+use Ithis\Bundle\EntityTranslation\Contract\Entity\TranslationInterface;
+use Ithis\Bundle\EntityTranslation\Contract\Provider\LocaleProviderInterface;
 use ReflectionClass;
 use ReflectionException;
 

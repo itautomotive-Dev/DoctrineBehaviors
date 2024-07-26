@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Knp\DoctrineBehaviors\PHPStan\Type;
+namespace Ithis\Bundle\EntityTranslation\PHPStan\Type;
 
-use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
+use Ithis\Bundle\EntityTranslation\Contract\Entity\TranslatableInterface;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;

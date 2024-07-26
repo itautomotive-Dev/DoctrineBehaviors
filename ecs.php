@@ -26,7 +26,7 @@ return static function (ECSConfig $ecsConfig): void {
             __DIR__ . '/tests/Fixtures/Entity/AbstractTimestampableMappedSuperclassEntity.php',
         ],
         __DIR__ . '/src/Bundle/DoctrineBehaviorsBundle.php',
-        __DIR__ . '/src/DoctrineBehaviorsBundle.php',
+        __DIR__ . '/src/IthisEntityTranslationBundle.php',
     ]);
 
     $ecsConfig->ruleWithConfiguration(GeneralPhpdocAnnotationRemoveFixer::class, [

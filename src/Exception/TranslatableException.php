@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Knp\DoctrineBehaviors\Exception;
+namespace Ithis\Bundle\EntityTranslation\Exception;
 
 use Exception;
 

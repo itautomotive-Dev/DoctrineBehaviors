@@ -197,7 +197,7 @@ PRs and issues are linked, so you can find more about it. Thanks to [ChangelogLi
 
 ### Changed
 
-- [#85] [FEATURE] Refactor \Knp\DoctrineBehaviors\ORM\Tree\Tree::getRootNodes to support QueryBuilder customization, Thanks to [@MisatoTremor]
+- [#85] [FEATURE] Refactor \Ithis\Bundle\EntityTranslation\ORM\Tree\Tree::getRootNodes to support QueryBuilder customization, Thanks to [@MisatoTremor]
 - [#187] Call generateSlug from SluggableSubscriber, Thanks to [@EmmanuelVella]
 - [#174] Fix ability to choose the class translation name, Thanks to [@asprega]
 - [#31] README update, Thanks to [@eillarra]

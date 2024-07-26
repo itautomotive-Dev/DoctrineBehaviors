@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Knp\DoctrineBehaviors\Contract\Entity;
+namespace Ithis\Bundle\EntityTranslation\Contract\Entity;
 
 interface TranslationInterface
 {

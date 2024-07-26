@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Knp\DoctrineBehaviors\Provider;
+namespace Ithis\Bundle\EntityTranslation\Provider;
 
-use Knp\DoctrineBehaviors\Contract\Provider\LocaleProviderInterface;
+use Ithis\Bundle\EntityTranslation\Contract\Provider\LocaleProviderInterface;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-final class LocaleProvider implements LocaleProviderInterface
+final readonly class LocaleProvider implements LocaleProviderInterface
 {
     public function __construct(
         private RequestStack $requestStack,
@@ -33,11 +33,7 @@ final class LocaleProvider implements LocaleProviderInterface
             return $currentLocale;
         }
 
-        if ($this->translator !== null) {
-            return $this->translator->getLocale();
-        }
-
-        return null;
+        return $this->translator?->getLocale();
     }
 
     public function provideFallbackLocale(): ?string

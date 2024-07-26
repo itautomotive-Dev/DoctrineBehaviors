@@ -19,10 +19,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->bind('$translatableFetchMode', '%doctrine_behaviors_translatable_fetch_mode%')
         ->bind('$translationFetchMode', '%doctrine_behaviors_translation_fetch_mode%');
 
-    $services->load('Knp\DoctrineBehaviors\\', __DIR__ . '/../src')
+    $services->load('Ithis\Bundle\EntityTranslation\\', __DIR__ . '/../src')
         ->exclude([
             __DIR__ . '/../src/Bundle',
-            __DIR__ . '/../src/DoctrineBehaviorsBundle.php',
+            __DIR__ . '/../src/IthisEntityTranslationBundle.php',
             __DIR__ . '/../src/Exception',
         ]);
 };

@@ -39,13 +39,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Knp\\DoctrineBehaviors\\": "src",
-            "Knp\\DoctrineBehaviors\\PHPStan\\": "utils/phpstan-behaviors/src"
+            "Ithis\\Bundle\\EntityTranslation\\": "src",
+            "Ithis\\Bundle\\EntityTranslation\\PHPStan\\": "utils/phpstan-behaviors/src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Knp\\DoctrineBehaviors\\Tests\\": "tests"
+            "Ithis\\Bundle\\EntityTranslation\\Tests\\": "tests"
         }
     },
     "scripts": {

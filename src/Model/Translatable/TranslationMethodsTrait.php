@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Knp\DoctrineBehaviors\Model\Translatable;
+namespace Ithis\Bundle\EntityTranslation\Model\Translatable;
 
-use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
+use Ithis\Bundle\EntityTranslation\Contract\Entity\TranslatableInterface;
 use Nette\Utils\Strings;
 
 trait TranslationMethodsTrait

@@ -23,8 +23,8 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Contract\Entity\TranslationInterface;
-use Knp\DoctrineBehaviors\Model\Translatable\TranslationTrait;
+use Ithis\Bundle\EntityTranslation\Contract\Entity\TranslationInterface;
+use Ithis\Bundle\EntityTranslation\Model\Translatable\TranslationTrait;
 
 #[ORM\Entity]
 class CategoryTranslation implements TranslationInterface
@@ -73,8 +73,8 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
-use Knp\DoctrineBehaviors\Model\Translatable\TranslatableTrait;
+use Ithis\Bundle\EntityTranslation\Contract\Entity\TranslatableInterface;
+use Ithis\Bundle\EntityTranslation\Model\Translatable\TranslatableTrait;
 
 #[ORM\Entity]
 class Category implements TranslatableInterface
@@ -105,7 +105,7 @@ you can now work on translations using `translate()` or `getTranslations()` meth
 
 declare(strict_types=1);
 
-/** @var \Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface $category */
+/** @var \Ithis\Bundle\EntityTranslation\Contract\Entity\TranslatableInterface $category */
 $category = new Category();
 $category->translate('fr')->setName('Chaussures');
 $category->translate('en')->setName('Shoes');
@@ -136,7 +136,7 @@ declare(strict_types=1);
 
 namespace AppBundle\Behavior;
 
-use Knp\DoctrineBehaviors\Model\Translatable\TranslatableTrait;
+use Ithis\Bundle\EntityTranslation\Model\Translatable\TranslatableTrait;
 
 trait TranslatableTrait
 {
@@ -159,7 +159,7 @@ declare(strict_types=1);
 
 namespace AppBundle\Behavior;
 
-use Knp\DoctrineBehaviors\Model\Translatable\TranslationTrait;
+use Ithis\Bundle\EntityTranslation\Model\Translatable\TranslationTrait;
 
 trait TranslationTrait
 {
@@ -183,7 +183,7 @@ in the translation entity. If you override one, you also need to override the ot
 
 #### Provide Current Locale
 
-This library provides an interface `Knp\DoctrineBehaviors\Contract\Provider\LocaleProviderInterface` that [by default returns the current locale using Symfony `RequestStack` or `TranslatorInterface`](https://github.com/KnpLabs/DoctrineBehaviors/blob/master/src/Provider/LocaleProvider.php).
+This library provides an interface `Ithis\Bundle\EntityTranslation\Contract\Provider\LocaleProviderInterface` that [by default returns the current locale using Symfony `RequestStack` or `TranslatorInterface`](https://github.com/KnpLabs/DoctrineBehaviors/blob/master/src/Provider/LocaleProvider.php).
 
 #### Proxy Translations
 

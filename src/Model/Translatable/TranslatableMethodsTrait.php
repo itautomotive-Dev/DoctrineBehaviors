@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Knp\DoctrineBehaviors\Model\Translatable;
+namespace Ithis\Bundle\EntityTranslation\Model\Translatable;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Knp\DoctrineBehaviors\Contract\Entity\TranslationInterface;
-use Knp\DoctrineBehaviors\Exception\TranslatableException;
+use Ithis\Bundle\EntityTranslation\Contract\Entity\TranslationInterface;
+use Ithis\Bundle\EntityTranslation\Exception\TranslatableException;
 
 trait TranslatableMethodsTrait
 {
