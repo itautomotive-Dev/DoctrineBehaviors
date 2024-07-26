@@ -21,7 +21,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->load('Ithis\Bundle\EntityTranslation\\', __DIR__ . '/../src')
         ->exclude([
-            __DIR__ . '/../src/Bundle',
             __DIR__ . '/../src/IthisEntityTranslationBundle.php',
             __DIR__ . '/../src/Exception',
         ]);
